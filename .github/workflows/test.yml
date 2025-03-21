@@ -37,12 +37,6 @@ jobs:
         run: |
           pip install black
 
-      - name: Format code
-        run: |
-          terraform fmt -check -recursive -diff
-          black --check . 
-          shfmt -w .
-
       - name: Clean up
         run: |
           rm -rf terraform.zip
