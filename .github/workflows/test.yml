@@ -11,7 +11,6 @@ on:
         options:
           - option1
           - option2
-          - option3
 
 jobs:
   deploy:
@@ -27,6 +26,12 @@ jobs:
       - name: Initialize
         run: |
           echo "Selected service: ${{ github.event.inputs.SERVICE }}"
+
+      - name: Format code
+        run: |
+          terraform fmt -check -recursive -diff
+          black --check .
+          shfmt -w .
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
